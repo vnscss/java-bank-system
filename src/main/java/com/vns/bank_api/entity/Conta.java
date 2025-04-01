@@ -1,6 +1,5 @@
 package com.vns.bank_api.entity;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,7 +38,7 @@ public class Conta {
         this.agenciaId = agenciaId;
     }
 
-    
+
     public Integer getClienteId() {
         return clienteId;
     }
