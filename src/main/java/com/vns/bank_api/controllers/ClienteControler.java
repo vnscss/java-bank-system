@@ -101,7 +101,7 @@ public class ClienteControler {
         } else if (loginStatus == 404) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado!");
         } else if (loginStatus == 401) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta!");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha incorretos!");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar cliente!");
         }
