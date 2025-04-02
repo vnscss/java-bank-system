@@ -16,6 +16,9 @@ public class Cliente extends Pessoa{
         this.gererentId = gerenteId;
     }
 
+    public void setContaNumero(Integer contaNumero) {
+        this.contaNumero = contaNumero;
+    }
     public Integer getContaNumero() {
         return contaNumero;
     }
