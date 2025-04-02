@@ -10,10 +10,38 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vns.bank_api.Payloads.ClientePayload;
 import com.vns.bank_api.entity.Cliente;
 import com.vns.bank_api.services.ClienteService;
 import com.vns.bank_api.services.UserService;
+
+class ClientePayload {
+
+    private String username;
+    private String password;
+
+    private String nome;
+    private String cpf;
+    private Integer dataNasc;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public Integer getDataNasc() {
+        return dataNasc;
+    }
+
+}
 
 
 @RestController
@@ -22,8 +50,6 @@ public class ClienteControler {
     @Autowired
     private ClienteService clienteService;
 
-    @Autowired
-    private ClientePayload clientePayload;
 
     @Autowired
     private UserService userService;
