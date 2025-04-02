@@ -10,4 +10,6 @@ public interface GerenteRepository extends JpaRepository<Gerente, Integer> {
     // Aqui você pode adicionar métodos personalizados, se necessário
     List<Gerente> findByNome(String nome);  
 
+    Gerente findFirstByOrderByIdAsc();
+
 }
