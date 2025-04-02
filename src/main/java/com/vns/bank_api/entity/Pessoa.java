@@ -16,6 +16,15 @@ public abstract class Pessoa {
     private String nome;
     private Integer dataNasc;
     private String role;
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;
