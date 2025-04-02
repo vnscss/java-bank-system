@@ -11,7 +11,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vns.bank_api.entity.Cliente;
+import com.vns.bank_api.entity.Gerente;
 import com.vns.bank_api.services.ClienteService;
+import com.vns.bank_api.services.ContaService;
+import com.vns.bank_api.services.GerenteService;
 import com.vns.bank_api.services.UserService;
 
 class ClientePayload {
@@ -50,6 +53,11 @@ public class ClienteControler {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private ContaService contaService;
+
+    @Autowired
+    private GerenteService gerenteService;
 
     @Autowired
     private UserService userService;
@@ -63,14 +71,26 @@ public class ClienteControler {
 
         Integer loginStatus =  userService.login(clientePayload.getUsername(), clientePayload.getPassword());
         if (loginStatus == 200) {
-
+                Integer userId = userService.findUser(clientePayload.getUsername()).get().getId();   
+                Gerente gerente = gerenteService.findFirstGerente();
+                Integer gerenteId;
+                if(gerente == null){
+                    gerenteId = 0;
+                }
+                else{
+                    gerenteId = gerente.getId();
+                }
                 Cliente cliente = new Cliente();
                 cliente.setNome(clientePayload.getNome());
                 cliente.setCpf(clientePayload.getCpf());
                 cliente.setDataNasc(clientePayload.getDataNasc());
+                cliente.setGerenteId(gerenteId);
 
 
-                Integer status = clienteService.createCliente(cliente);
+                Integer status = clienteService.createCliente(cliente , userId);
+
+
+                
                 if (status == 201) {
                     return ResponseEntity.status(HttpStatus.CREATED).body("Cliente criado com sucesso!");
                 } else if (status == 409) {
