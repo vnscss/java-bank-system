@@ -15,5 +15,9 @@ public class GerenteService {
         return gerenteRepository.findFirstByOrderByIdAsc();
     }
 
+
+    public Gerente creaGerente(Gerente gerente) {
+        return gerenteRepository.save(gerente);
+    }
     
 }
