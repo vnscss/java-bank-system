@@ -38,6 +38,11 @@ public class UserService {
     return usuarios;
     }
 
+    public Optional<Usuarios> findUserById(Integer id) {
+        Optional<Usuarios> usuarios = usuariosRepository.findById(id);
+        return usuarios;
+    }
+
 
     public Integer CreateUser(String username, String password) {
          Optional<Usuarios> usuarioReturn = findUser(username);

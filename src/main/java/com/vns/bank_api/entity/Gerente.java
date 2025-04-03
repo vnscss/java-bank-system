@@ -1,5 +1,7 @@
 package com.vns.bank_api.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -13,6 +15,14 @@ public class Gerente extends Pessoa {
     }
     public void setClientes(String clientes) {
         this.clientes = clientes;
+    }
+
+    public List<String> getRole() {
+        return super.getRole();
+    }
+
+    public void setRole(String role){
+        super.setRole(role);
     }
 
 }

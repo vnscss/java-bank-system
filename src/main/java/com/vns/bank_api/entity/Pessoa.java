@@ -1,5 +1,7 @@
 package com.vns.bank_api.entity;
 
+import java.util.List;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +17,7 @@ public abstract class Pessoa {
     private String cpf;
     private String nome;
     private Integer dataNasc;
-    private String role;
+    protected List<String> role;
     private Integer userId;
 
     public Integer getUserId() {
@@ -56,11 +58,11 @@ public abstract class Pessoa {
     }
 
 
-    public String getRole() {
+    public List<String> getRole() {
         return role;
     }
-    public void setRole(Integer gerenteId ,String role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.role.add(role);
     }
 
 }
