@@ -28,6 +28,11 @@ public class AdminControler {
     static class CreateAdminPayload {
         private String username;
         private String password;
+        private String targetUser;
+
+        public String getTargetUser() {
+            return targetUser;
+        }
 
         public String getUsername() {
             return username;
@@ -54,20 +59,19 @@ public class AdminControler {
         Integer status = adminService.adminLogin(usuarios);
 
         if(status == 200) {
-            Admins existingAdmin = adminsRepository.findById(1).orElse(null);
-            if (existingAdmin == null) {
-                Admins admins = new Admins();
-                admins.addUsuario(usuarios);
-                adminsRepository.save(admins);
+            Admins admins = adminsRepository.findById(1).orElse(null);
+            if (admins != null) {
+                admins.getUsuarios().add(usuarios); // Ensure the relationship is updated
+                adminsRepository.saveAndFlush(admins); // Use saveAndFlush to persist changes immediately
+                return ResponseEntity.status(HttpStatus.OK).body("Admin created successfully");
+            } 
             }
-            if(existingAdmin != null) {
-                existingAdmin.addUsuario(usuarios);
-                adminsRepository.save(existingAdmin);
-            }
-            return ResponseEntity.status(HttpStatus.OK).body("Admin created successfully");
-        } else {
-            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        if (status == 401) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         }
+        else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating admin");
+        }
+
     }
-    
 }

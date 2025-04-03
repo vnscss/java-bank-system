@@ -21,22 +21,34 @@ public class AdminService {
     @Autowired
     private UserService userService;
 
-    Admins findUserInAdmin(Usuarios usuarios) {
-        if (usuarios.getAdmins() != null) {
-            Optional<Admins> userInAdmin = adminsRepository.findById(usuarios.getAdmins().getId());
-            return userInAdmin.orElse(null);
+    Boolean findUserInAdmin(Usuarios usuarios) {
+        Optional<Usuarios> user = userService.findUser(usuarios.getUsername());
+        if (user.isPresent() && user.get().getAdmins() != null) {
+            return true;
         }
-        return null;
+        return false;
     }
 
     public Integer adminLogin(Usuarios usuarios) {
         Integer loginStatus = userService.login(usuarios.getUsername(), usuarios.getPassword());
-        Admins userInAdmins = findUserInAdmin(usuarios);
+        Boolean userInAdmins = findUserInAdmin(usuarios);
 
-        if (loginStatus == 200 && userInAdmins != null) {
+        if (loginStatus == 200 && userInAdmins) {
             return 200;
+        }else{
+            return 401;
+            }
         }
 
-        return 401;
+    public Integer createAdmin(Usuarios usuarios) {
+        Integer status = adminLogin(usuarios);
+        if (status == 200) {
+            Admins admins = adminsRepository.findById(1).orElse(null);
+            admins.addUsuario(usuarios);
+        }if(status == 401){
+            return 401; 
+        }else{
+            return 500; 
+        }
     }
 }

@@ -30,12 +30,12 @@ public class Admins{
         return usuarios;
     }
 
-    public void addUsuario(Usuarios usuario) {
-        this.usuarios.add(usuario);
+    public void addUsuario(Usuarios usuarios) {
+        this.usuarios.add(usuarios);
     }
 
-    public void removeUsuario(Usuarios usuario) {
-        this.usuarios.remove(usuario);
+    public void removeUsuario(Usuarios usuarios) {
+        this.usuarios.remove(usuarios);
     }
 }
 
