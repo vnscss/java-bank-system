@@ -85,6 +85,7 @@ public class ClienteControler {
                 cliente.setCpf(clientePayload.getCpf());
                 cliente.setDataNasc(clientePayload.getDataNasc());
                 cliente.setGerenteId(gerenteId);
+                cliente.setRole("cl-000");
 
 
                 Integer status = clienteService.createCliente(cliente , userId);
