@@ -59,7 +59,7 @@ public abstract class Pessoa {
     public String getRole() {
         return role;
     }
-    public void setRole(Integer gerenteId ,String role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
