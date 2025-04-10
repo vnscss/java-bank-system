@@ -20,13 +20,6 @@ public class Usuarios {
     private String username;
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "admin_id") // Optional: specify the foreign key column name
-    private Admins admin;
-
-    public Admins getAdmins() {
-        return admin;
-    }
 
     public Integer getId() {
         return id;
