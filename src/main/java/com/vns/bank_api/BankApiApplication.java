@@ -12,23 +12,6 @@ public class BankApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BankApiApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner runQuery(JdbcTemplate jdbcTemplate) {
-		return args -> {
-			// Check if the table 'admins' has any records
-			String checkSql = "SELECT COUNT(*) FROM admins";
-			Integer count = jdbcTemplate.queryForObject(checkSql, Integer.class);
-
-			// If no records exist, insert an admin with id 1
-			if (count != null && count == 0) {
-				String insertSql = "INSERT INTO admins (id) VALUES (1)";
-				jdbcTemplate.update(insertSql);
-				System.out.println("Admin with id 1 inserted.");
-			} else {
-				System.out.println("Admins table already has records.");
-			}
-		};
-	}
 
 	@Bean
 	public CommandLineRunner createAdminUserIfNotExists(JdbcTemplate jdbcTemplate) {
