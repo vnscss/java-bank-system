@@ -8,4 +8,5 @@ import com.vns.bank_api.entity.Conta;
 public interface ContaRepository extends JpaRepository<Conta, Integer> {
     // Aqui você pode adicionar métodos personalizados, se necessário
     Optional<Conta> findByClienteId(Integer clienteId);
+
 }
