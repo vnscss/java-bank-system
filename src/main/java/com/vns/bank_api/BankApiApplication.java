@@ -22,7 +22,7 @@ public class BankApiApplication {
 
 			// If no such user exists, insert a new user with id 0, username 'admin', password 'admin', and admin_id = 1
 			if (userCount != null && userCount == 0) {
-				String insertUserSql = "INSERT INTO usuarios (id, username, password, admin_id) VALUES (0, 'admin', 'admin', 1)";
+				String insertUserSql = "INSERT INTO usuarios (id, username, password) VALUES (0, 'admin', 'admin')";
 				jdbcTemplate.update(insertUserSql);
 				System.out.println("User with username 'admin' created with id 0.");
 			} else {
