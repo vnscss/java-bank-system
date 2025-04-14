@@ -92,5 +92,26 @@ public class ContaService {
             return 500;
         }
     }
+
+    public Integer sacar(Double valor, String cpf) {
+        List<Cliente> cliente = clienteRepository.findByCpf(cpf);
+        if (cliente.isEmpty()) {
+            return 500;
+        }
+        Optional<Conta> conta = contaRepository.findByClienteId(cliente.get(0).getId());
+        if (conta.isPresent()) {
+            Double saldoAtual = conta.get().getSaldo();
+            if (valor > saldoAtual) {
+                return 400; 
+            } else {
+                Double novoSaldo = saldoAtual - valor;
+                conta.get().setSaldo(novoSaldo);
+                contaRepository.save(conta.get());
+                return 200;
+            }
+        } else {
+            return 500;
+        }
+    }
 }
 
